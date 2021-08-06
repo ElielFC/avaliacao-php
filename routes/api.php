@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:web'], 'prefix' => '/product-categories', 'namespace' => 'Api'], function () {
+    Route::get('/', 'ProductCategoriesController@index');
+    Route::get('/{id}', 'ProductCategoriesController@show');
+    Route::post('/', 'ProductCategoriesController@store');
+    Route::put('/{id}', 'ProductCategoriesController@update');
+    Route::delete('/{id}', 'ProductCategoriesController@destroy');
 });
