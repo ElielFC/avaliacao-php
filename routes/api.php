@@ -20,3 +20,7 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => '/product-categories', '
     Route::put('/{id}', 'ProductCategoryController@update');
     Route::delete('/{id}', 'ProductCategoryController@destroy');
 });
+
+Route::group(['middleware' => ['auth:web'], 'prefix' => '/products', 'namespace' => 'Api'], function () {
+    Route::get('/', 'ProductController@index');
+});
