@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\Product\CreateProductService;
-use App\Services\Product\ListProductService;
-use App\Services\Product\UpdateProductService;
+use App\Services\Product\{
+    CreateProductService,
+    DeleteProductService,
+    ListProductService,
+    UpdateProductService
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,15 +29,23 @@ class ProductController extends Controller
      */
     private $update_product_service;
 
+    /**
+     * @var DeleteProductService
+     */
+    private $delete_product_service;
+
     public function __construct(
         ListProductService $list_products_service,
         CreateProductService $create_product_service,
-        UpdateProductService $update_product_service
+        UpdateProductService $update_product_service,
+        DeleteProductService $delete_product_service
     ) {
         $this->list_products_service = $list_products_service;
         $this->create_product_service = $create_product_service;
         $this->update_product_service = $update_product_service;
+        $this->delete_product_service = $delete_product_service;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -147,8 +158,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $this->delete_product_service->execute($id);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            logger()->error($e->getMessage());
+            abort(500, 'Internal Server Error');
+        }
+
+        DB::commit();
+
+        return response()->json([], 200);
     }
 }

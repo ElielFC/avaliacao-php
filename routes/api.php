@@ -25,4 +25,5 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => '/products', 'namespace'
     Route::get('/', 'ProductController@index');
     Route::post('/', 'ProductController@store');
     Route::put('/{id}', 'ProductController@update');
+    Route::delete('/{id}', 'ProductController@destroy');
 });
