@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <a href="{{route('product-categories')}}" class="btn btn-outline-primary">Categorias de Produtos</a>
                 </div>
             </div>
         </div>
