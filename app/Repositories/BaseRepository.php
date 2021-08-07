@@ -83,4 +83,19 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->destroy($id);
     }
+
+    /**
+     * Adiciona escopos ao modelo
+     *
+     * @param  array $scopes
+     * @return $this
+     */
+    public function addLocalScopes(array $scopes)
+    {
+        foreach ($scopes as $scope) {
+            $this->model = $this->model->{$scope}();
+        }
+
+        return $this;
+    }
 }

@@ -45,4 +45,12 @@ interface BaseRepositoryInterface
      * @return int
      */
     public function destroy(int $id): int;
+
+    /**
+     * Adiciona escopos ao modelo
+     *
+     * @param  array $scopes
+     * @return $this
+     */
+    public function addLocalScopes(array $scopes);
 }
