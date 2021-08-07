@@ -7,6 +7,7 @@ use App\Services\Product\{
     CreateProductService,
     DeleteProductService,
     ListProductService,
+    ShowProductService,
     UpdateProductService
 };
 use Illuminate\Http\Request;
@@ -34,16 +35,23 @@ class ProductController extends Controller
      */
     private $delete_product_service;
 
+    /**
+     * @var ShowProductService
+     */
+    private $show_product_service;
+
     public function __construct(
         ListProductService $list_products_service,
         CreateProductService $create_product_service,
         UpdateProductService $update_product_service,
-        DeleteProductService $delete_product_service
+        DeleteProductService $delete_product_service,
+        ShowProductService $show_product_service
     ) {
         $this->list_products_service = $list_products_service;
         $this->create_product_service = $create_product_service;
         $this->update_product_service = $update_product_service;
         $this->delete_product_service = $delete_product_service;
+        $this->show_product_service = $show_product_service;
     }
 
     /**
@@ -99,9 +107,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        return $this->show_product_service->execute($id);
     }
 
     /**
