@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\ProductCategories;
+use App\Models\ProductCategory;
 use App\Models\User;
 use Tests\TestCase;
 
-class ProductCategoriesTest extends TestCase
+class ProductCategoryTest extends TestCase
 {
     /**
      * Listando todas as categorias
@@ -33,7 +33,7 @@ class ProductCategoriesTest extends TestCase
     {
         $this->actingAs(User::find(1));
 
-        $categories = factory(ProductCategories::class)->make();
+        $categories = factory(ProductCategory::class)->make();
 
         $response = $this->postJson('/api/product-categories', [
             'name_category' => $categories->name_category,
@@ -73,7 +73,7 @@ class ProductCategoriesTest extends TestCase
     {
         $this->actingAs(User::find(1));
 
-        $categories = factory(ProductCategories::class)->create();
+        $categories = factory(ProductCategory::class)->create();
 
         $response = $this->putJson('/api/product-categories/'. $categories->id, [
             'name_category' => $categories->name_category . 'Atualizado',
@@ -96,7 +96,7 @@ class ProductCategoriesTest extends TestCase
     {
         $this->actingAs(User::find(1));
 
-        $categories = factory(ProductCategories::class)->create();
+        $categories = factory(ProductCategory::class)->create();
 
         $response = $this->putJson('/api/product-categories/'. $categories->id, [
             'name_category' => '',
@@ -132,7 +132,7 @@ class ProductCategoriesTest extends TestCase
     {
         $this->actingAs(User::find(1));
 
-        $categories = factory(ProductCategories::class)->create();
+        $categories = factory(ProductCategory::class)->create();
 
         $response = $this->deleteJson('/api/product-categories/'. $categories->id);
 

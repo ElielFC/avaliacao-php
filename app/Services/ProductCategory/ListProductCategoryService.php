@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Services\ProductCategories;
+namespace App\Services\ProductCategory;
 
-use App\Contracts\ProductCategoriesRepositoryInterface;
+use App\Contracts\ProductCategoryRepositoryInterface;
 
-class ListProductCategoriesService
+class ListProductCategoryService
 {
     /**
-     * @var ProductCategoriesRepositoryInterface
+     * @var ProductCategoryRepositoryInterface
      */
     private $product_categories_repository;
 
-    public function __construct(ProductCategoriesRepositoryInterface $product_categories_repository)
+    public function __construct(ProductCategoryRepositoryInterface $product_categories_repository)
     {
         $this->product_categories_repository = $product_categories_repository;
     }

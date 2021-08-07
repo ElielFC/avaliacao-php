@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\ProductCategories;
+use App\Models\ProductCategory;
 use Faker\Generator as Faker;
 
-$factory->define(ProductCategories::class, function (Faker $faker) {
+$factory->define(ProductCategory::class, function (Faker $faker) {
     return [
         'name_category' => $faker->word,
     ];

@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['auth:web'], 'prefix' => '/product-categories', 'namespace' => 'Api'], function () {
-    Route::get('/', 'ProductCategoriesController@index');
-    Route::get('/{id}', 'ProductCategoriesController@show');
-    Route::post('/', 'ProductCategoriesController@store');
-    Route::put('/{id}', 'ProductCategoriesController@update');
-    Route::delete('/{id}', 'ProductCategoriesController@destroy');
+    Route::get('/', 'ProductCategoryController@index');
+    Route::get('/{id}', 'ProductCategoryController@show');
+    Route::post('/', 'ProductCategoryController@store');
+    Route::put('/{id}', 'ProductCategoryController@update');
+    Route::delete('/{id}', 'ProductCategoryController@destroy');
 });

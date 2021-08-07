@@ -3,49 +3,49 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\ProductCategories\{
-    ListProductCategoriesService,
-    CreateProductCategoriesService,
-    UpdateProductCategoriesService,
-    DeleteProductCategoriesService,
-    ShowProductCategoriesService
+use App\Services\ProductCategory\{
+    ListProductCategoryService,
+    CreateProductCategoryService,
+    UpdateProductCategoryService,
+    DeleteProductCategoryService,
+    ShowProductCategoryService
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProductCategoriesController extends Controller
+class ProductCategoryController extends Controller
 {
     /**
-     * @var ListProductCategoriesService
+     * @var ListProductCategoryService
      */
     private $list_product_categories_service;
 
     /**
-     * @var CreateProductCategoriesService
+     * @var CreateProductCategoryService
      */
     private $create_product_category_service;
 
     /**
-     * @var UpdateProductCategoriesService
+     * @var UpdateProductCategoryService
      */
     private $update_product_category_service;
 
     /**
-     * @var DeleteProductCategoriesService
+     * @var DeleteProductCategoryService
      */
     private $delete_product_category_service;
 
     /**
-     * @var ShowProductCategoriesService
+     * @var ShowProductCategoryService
      */
     private $show_product_category_service;
 
     public function __construct(
-        ListProductCategoriesService $list_product_categories_service,
-        CreateProductCategoriesService $create_product_category_service,
-        UpdateProductCategoriesService $update_product_category_service,
-        DeleteProductCategoriesService $delete_product_category_service,
-        ShowProductCategoriesService $show_product_category_service
+        ListProductCategoryService $list_product_categories_service,
+        CreateProductCategoryService $create_product_category_service,
+        UpdateProductCategoryService $update_product_category_service,
+        DeleteProductCategoryService $delete_product_category_service,
+        ShowProductCategoryService $show_product_category_service
     ) {
         $this->list_product_categories_service = $list_product_categories_service;
         $this->create_product_category_service = $create_product_category_service;
