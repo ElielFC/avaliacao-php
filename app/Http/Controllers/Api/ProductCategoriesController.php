@@ -104,6 +104,12 @@ class ProductCategoriesController extends Controller
     {
         DB::beginTransaction();
 
+        validator([
+            'id' => $id
+        ], [
+            'id' => 'required|exists:product_categories,id',
+        ])->validate();
+
         try {
             $product_category = $this->show_product_category_service->execute($id);
         } catch (\Exception $e) {
@@ -127,9 +133,13 @@ class ProductCategoriesController extends Controller
     {
         DB::beginTransaction();
 
-        $request->validate([
+        validator([
+            'id' => $id,
+            'name_category' => $request->input('name_category')
+        ], [
+            'id' => 'required|exists:product_categories,id',
             'name_category' => 'required|max:150'
-        ]);
+        ])->validate();
 
         $attributes = $request->only(['name_category']);
 
