@@ -38,12 +38,14 @@
             </td>
             <td class="text-center">
               <button
+                v-if="!item.associated_with_products"
                 type="button"
                 @click.prevent="onDestroyProductCategory(item)"
                 class="btn btn-outline-danger btn-sm"
               >
                 Excluir
               </button>
+              <button v-else disabled="true" class="btn btn-outline-danger btn-sm" title="Não é possível excluir categorias que já estão associada em produtos.">Excluir</button>
             </td>
           </tr>
         </tbody>

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\User;
 use Tests\TestCase;
@@ -151,6 +152,27 @@ class ProductCategoryTest extends TestCase
 
         $response = $this->deleteJson('/api/product-categories/'. 20000);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
+    }
+
+    /**
+     * Falhar ao Excluir uma categoria associada a um produto
+     *
+     * @return void
+     * @test
+     */
+    public function failDestroyProductCategoryWithProducts()
+    {
+        $this->actingAs(User::find(1));
+
+        $category = factory(ProductCategory::class)->create();
+
+        factory(Product::class, 2)->create([
+            'product_category_id' => $category->id,
+        ]);
+
+        $response = $this->deleteJson('/api/product-categories/'. $category->id);
+
+        $response->assertStatus(403);
     }
 }

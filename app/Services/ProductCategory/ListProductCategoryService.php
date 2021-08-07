@@ -20,10 +20,13 @@ class ListProductCategoryService
     {
         $product_categories = $this->product_categories_repository->all();
 
+        $product_categories->loadCount(['products']);
+
         return $product_categories->map( function($item) {
             return [
                 'id' => $item->id,
                 'name' => $item->name_category,
+                'associated_with_products' => !!$item->products_count,
             ];
         });
     }

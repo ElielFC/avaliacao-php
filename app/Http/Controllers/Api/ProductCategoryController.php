@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\ProductCategoryWithProductsException;
 use App\Http\Controllers\Controller;
 use App\Services\ProductCategory\{
     ListProductCategoryService,
@@ -10,6 +11,7 @@ use App\Services\ProductCategory\{
     DeleteProductCategoryService,
     ShowProductCategoryService
 };
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -167,6 +169,12 @@ class ProductCategoryController extends Controller
 
         try {
             $this->delete_product_category_service->execute($id);
+        } catch (ProductCategoryWithProductsException $e) {
+            DB::rollBack();
+            abort(403, $e->getMessage());
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+            abort(404, $e->getMessage());
         } catch (\Exception $e) {
             DB::rollBack();
             logger()->error($e->getMessage());
