@@ -49,15 +49,15 @@
         </tbody>
       </table>
     </div>
-    <product-category ref="productCategory" />
+    <modal-product-category ref="productCategory" />
   </div>
 </template>
 
 <script>
-import ProductCategory from "./ProductCategory.vue";
+import ModalProductCategory from "./ModalProductCategory.vue";
 export default {
   components: {
-    ProductCategory,
+    ModalProductCategory,
   },
   data() {
     return {
