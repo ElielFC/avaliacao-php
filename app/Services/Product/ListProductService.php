@@ -26,7 +26,7 @@ class ListProductService
             return [
                 'id' => $item->id,
                 'product_name' => $item->product_name,
-                'product_category_name' => $item->productCategory->name,
+                'product_category_name' => $item->productCategory->name_category,
                 'registration_date' => $item->registration_date,
                 'product_value' => $item->product_value,
             ];
