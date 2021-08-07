@@ -21,7 +21,7 @@ class Product extends Model
 
     public function productCategory()
     {
-        return $this->hasOne(ProductCategory::class, 'product_category_id', 'id');
+        return $this->hasOne(ProductCategory::class, 'id', 'product_category_id');
     }
 
     public function scopeProductCategoryName($query)
