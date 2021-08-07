@@ -23,4 +23,5 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => '/product-categories', '
 
 Route::group(['middleware' => ['auth:web'], 'prefix' => '/products', 'namespace' => 'Api'], function () {
     Route::get('/', 'ProductController@index');
+    Route::post('/', 'ProductController@store');
 });

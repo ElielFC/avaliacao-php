@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\Product\CreateProductService;
 use App\Services\Product\ListProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -13,10 +15,17 @@ class ProductController extends Controller
      */
     private $list_products_service;
 
+    /**
+     * @var CreateProductService
+     */
+    private $create_product_service;
+
     public function __construct(
-        ListProductService $list_products_service
+        ListProductService $list_products_service,
+        CreateProductService $create_product_service
     ) {
         $this->list_products_service = $list_products_service;
+        $this->create_product_service = $create_product_service;
     }
     /**
      * Display a listing of the resource.
@@ -36,7 +45,33 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        $this->validate($request, [
+            'product_category_id' => 'required|exists:product_categories,id',
+            'registration_date' => 'required|date_format:Y-m-d',
+            'product_name' => 'required|max:150',
+            'product_value' => 'required|numeric',
+        ]);
+
+        $attributes = $request->only([
+            'product_category_id',
+            'registration_date',
+            'product_name',
+            'product_value',
+        ]);
+
+        try {
+            $product = $this->create_product_service->execute($attributes);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            logger()->error($e->getMessage());
+            abort(500, 'Internal Server Error');
+        }
+
+        DB::commit();
+
+        return response()->json($product, 201);
     }
 
     /**
