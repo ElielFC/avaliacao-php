@@ -11,8 +11,10 @@ import Vue from "vue";
 import Axios from "axios";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Money from "v-money";
 
 Vue.use(VueSweetalert2);
+Vue.use(Money, { decimal: ",", thousands: ".", precision: 2, prefix: 'R$ ' });
 
 Vue.prototype.$axios = Axios;
 
