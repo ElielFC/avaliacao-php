@@ -23,6 +23,7 @@ class ShowProductService
         return [
             'id' => $product->id,
             'product_name' => $product->product_name,
+            'product_category_id' => $product->productCategory->id,
             'product_category_name' => $product->productCategory->name_category,
             'registration_date' => $product->registration_date,
             'product_value' => $product->product_value,
