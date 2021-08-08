@@ -16,9 +16,9 @@ class ListProductService
         $this->product_repository = $product_repository;
     }
 
-    public function execute()
+    public function execute(array $attributes = [])
     {
-        $products = $this->product_repository->all();
+        $products = $this->product_repository->getByFilters($attributes);
 
         $products->loadMissing('productCategory');
 

@@ -61,7 +61,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return $this->list_products_service->execute();
+        return $this->list_products_service->execute(
+            request()
+                ->only(['product_name', 'product_category_id'])
+        );
     }
 
     /**
