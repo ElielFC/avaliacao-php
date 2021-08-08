@@ -1,19 +1,22 @@
 <template>
   <div class="card">
-    <div class="card-header">Categorias de Produtos</div>
-    <div class="card-body">
-      <div class="row justify-content-end">
-        <div class="col-md-12">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-9">
+          <h4>Categorias de Produtos</h4>
+        </div>
+        <div class="col-md-3 d-flex flex-row-reverse">
           <button
             @click="newProductCategory"
             type="button"
             class="btn btn-outline-primary"
           >
-            Novo
+            Nova Categoria
           </button>
         </div>
       </div>
-      <br />
+    </div>
+    <div class="card-body">
       <table class="table">
         <caption>
           Lista de Categorias de Produtos

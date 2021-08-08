@@ -1,17 +1,23 @@
 <template>
   <div class="card">
-    <div class="card-header">Categorias de Produtos</div>
-    <div class="card-body">
-      <div class="row justify-content-end">
-        <div class="col-md-12">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-9">
+          <h4>Cadastros de Produtos</h4>
+        </div>
+        <div class="col-md-3 d-flex flex-row-reverse">
           <button
             @click="newProduct"
             type="button"
-            class="btn btn-outline-primary"
+            class="btn btn-outline-primary btn-sm"
           >
-            Novo
+            Novo Produto
           </button>
         </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
       </div>
       <br />
       <table class="table">
