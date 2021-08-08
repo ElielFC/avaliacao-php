@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "date-fns": "^2.23.0",
         "vue-sweetalert2": "^5.0.2"
     }
 }
