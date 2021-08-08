@@ -38,7 +38,7 @@ class ProductTest extends TestCase
 
         $product = factory(Product::class)->make([
             'product_category_id' => $product_category->id,
-            'registration_date' => now()->format('Y-m-d'),
+            'registration_date' => now()->format('Y-m-d H:i:s'),
         ]);
 
         $response = $this->postJson('/api/products', $product->toArray());
@@ -60,7 +60,7 @@ class ProductTest extends TestCase
 
         $product = factory(Product::class)->make([
             'product_category_id' => 20000,
-            'registration_date' => now()->format('d-m-Y'),
+            'registration_date' => now()->format('Y-m-d H:i:s'),
         ]);
 
         $response = $this->postJson('/api/products', $product->toArray());
@@ -82,7 +82,7 @@ class ProductTest extends TestCase
 
         $product = factory(Product::class)->create([
             'product_category_id' => $product_category->id,
-            'registration_date' => now()->format('Y-m-d'),
+            'registration_date' => now()->format('Y-m-d H:i:s'),
         ]);
 
         $response = $this->putJson('/api/products/'. $product->id, $product->toArray());

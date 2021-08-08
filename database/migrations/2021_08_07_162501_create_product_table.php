@@ -16,7 +16,7 @@ class CreateProductTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('product_category_id');
-            $table->date('registration_date');
+            $table->dateTime('registration_date');
             $table->string('product_name');
             $table->decimal('product_value', 10, 2);
             $table->timestamps();
