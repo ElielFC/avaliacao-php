@@ -30,6 +30,7 @@ Vue.prototype.$axios = Axios;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('product-category', require('./components/product-category/index.vue').default);
+Vue.component('v-product', require('./components/product/index.vue').default);
 
 
 Axios.interceptors.response.use(

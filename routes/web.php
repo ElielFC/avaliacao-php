@@ -24,3 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth'], 'prefix' => '/product-categories'], function () {
     Route::get('/', 'ProductCategoryController')->name('product-categories');
 });
+Route::group(['middleware' => ['auth'], 'prefix' => '/product'], function () {
+    Route::get('/', 'ProductController')->name('product');
+});
