@@ -15,6 +15,7 @@
                     @endif
 
                     <a href="{{route('product-categories')}}" class="btn btn-outline-primary">Categorias de Produtos</a>
+                    <a href="{{route('product')}}" class="btn btn-outline-secondary">Cadastro de Produtos</a>
                 </div>
             </div>
         </div>
