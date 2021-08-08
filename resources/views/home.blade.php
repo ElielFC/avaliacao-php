@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -13,7 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     <a href="{{route('product-categories')}}" class="btn btn-outline-primary">Categorias de Produtos</a>
                     <a href="{{route('product')}}" class="btn btn-outline-secondary">Cadastro de Produtos</a>
                 </div>
