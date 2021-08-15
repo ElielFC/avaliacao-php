@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Services\Product\{
     CreateProductService,
     DeleteProductService,
@@ -11,7 +12,6 @@ use App\Services\Product\{
     ShowProductService,
     UpdateProductService
 };
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -112,30 +112,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateProductRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, UpdateProductRequest $request)
     {
         DB::beginTransaction();
-
-        validator(
-            [
-                'id'                  => $id,
-                'product_category_id' => $request->input('product_category_id'),
-                'registration_date'   => $request->input('registration_date'),
-                'product_name'        => $request->input('product_name'),
-                'product_value'       => $request->input('product_value'),
-            ],
-            [
-                'id'                  => 'required|exists:products,id',
-                'product_category_id' => 'required|exists:product_categories,id',
-                'registration_date' => 'required|date_format:Y-m-d H:i:s',
-                'product_name'        => 'required|max:150',
-                'product_value'       => 'required|numeric',
-            ]
-        )->validate();
 
         $attributes = $request->only([
             'product_category_id',
