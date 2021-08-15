@@ -120,7 +120,7 @@ class ProductCategoryTest extends TestCase
             'name_category' => 'teste',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertStatus(404);
     }
 
     /**

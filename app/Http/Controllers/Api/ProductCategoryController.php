@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\ProductCategoryWithProductsException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductCategoryRequest;
+use App\Http\Requests\UpdateProductCategoryRequest;
 use App\Services\ProductCategory\{
     ListProductCategoryService,
     CreateProductCategoryService,
@@ -12,7 +14,6 @@ use App\Services\ProductCategory\{
     ShowProductCategoryService
 };
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductCategoryController extends Controller
@@ -71,16 +72,12 @@ class ProductCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreateProductCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductCategoryRequest $request)
     {
         DB::beginTransaction();
-
-        $request->validate([
-            'name_category' => 'required|max:150'
-        ]);
 
         $attributes = $request->only(['name_category']);
 
@@ -128,25 +125,20 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateProductCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, UpdateProductCategoryRequest $request)
     {
         DB::beginTransaction();
 
-        validator([
-            'id' => $id,
-            'name_category' => $request->input('name_category')
-        ], [
-            'id' => 'required|exists:product_categories,id',
-            'name_category' => 'required|max:150'
-        ])->validate();
-
         $attributes = $request->only(['name_category']);
 
+        $product_category = $this->update_product_category_service->execute($id, $attributes);
         try {
-            $product_category = $this->update_product_category_service->execute($id, $attributes);
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+            abort(404, $e->getMessage());
         } catch (\Exception $e) {
             DB::rollBack();
             logger()->error($e->getMessage());
