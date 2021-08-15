@@ -24,7 +24,6 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'                  => 'required|exists:products,id',
             'product_category_id' => 'required|exists:product_categories,id',
             'registration_date'   => 'required|date_format:Y-m-d H:i:s',
             'product_name'        => 'required|max:150',
