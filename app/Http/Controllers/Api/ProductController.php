@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductRequest;
 use App\Services\Product\{
     CreateProductService,
     DeleteProductService,
@@ -70,19 +71,12 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreateProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         DB::beginTransaction();
-
-        $this->validate($request, [
-            'product_category_id' => 'required|exists:product_categories,id',
-            'registration_date' => 'required|date_format:Y-m-d H:i:s',
-            'product_name' => 'required|max:150',
-            'product_value' => 'required|numeric',
-        ]);
 
         $attributes = $request->only([
             'product_category_id',
