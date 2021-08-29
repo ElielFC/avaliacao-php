@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        /** Laravel Auditing */
+        OwenIt\Auditing\AuditingServiceProvider::class,
 
         /*
          * Application Service Providers...
